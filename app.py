@@ -4,6 +4,7 @@
 from flask import Flask, jsonify
 import pandas as pd
 import pickle
+from lightgbm import LGBMClassifier
 
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -25,7 +26,7 @@ def hello():
     return 'Hello, World!'
 
 
-@app.route('/outil_scoring_credit/<identifiant>')
+@app.route('/prediction/<identifiant>')
 def prediction(identifiant):
     print('identifiant du client = ', identifiant)
 
