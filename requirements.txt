@@ -1,5 +1,6 @@
 pandas==1.4.2
-sklearn==0.23.2
+sklearn
+scikit-learn
 pickle-mixin==1.0.2
 Flask==2.1.0
 gunicorn==20.1.0
