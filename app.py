@@ -41,9 +41,9 @@ def prediction(identifiant):
 
     X_sans_id = X.drop(columns='SK_ID_CURR')
 
-    X_pred = preprocessor.transform(X_sans_id)
-    proba = model.predict_proba(X_pred)
-    pred = model.predict(X_pred)
+    #X_pred = preprocessor.transform(X_sans_id)
+    proba = model.predict_proba(X_sans_id)
+    pred = model.predict(X_sans_id)
 
     # DEBUG
     # print('id_client : ', id_client)
