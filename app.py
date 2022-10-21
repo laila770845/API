@@ -3,10 +3,7 @@
 # Import des librairies
 from flask import Flask, jsonify
 import sklearn
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler
+from sklearn import preprocessing
 
 import pandas as pd
 import pickle
