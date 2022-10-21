@@ -2,7 +2,6 @@
 
 # Import des librairies
 from flask import Flask, jsonify
-import pycaret
 import sklearn
 import pandas as pd
 import pickle
