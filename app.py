@@ -3,12 +3,6 @@
 # Import des librairies
 from flask import Flask, jsonify
 import sklearn
-from sklearn import preprocessing
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.compose import ColumnTransformer
-
 import pandas as pd
 import pickle
 from lightgbm import LGBMClassifier
@@ -25,8 +19,6 @@ data = pd.read_csv('Clients_test_dashboard.csv')
 #Chargement du modèle
 model = pickle.load(open('model_best_lgb.pkl', 'rb'))
 
-#Chargement du preprocessor
-preprocessor = pickle.load(open('preprocessor.pkl', 'rb'))
 
 @app.route('/')
 def hello():
@@ -41,13 +33,9 @@ def prediction(identifiant):
     ID = int(identifiant)
     X = data[data['SK_ID_CURR'] == ID]
 
-
-
     X_sans_id = X.drop(columns='SK_ID_CURR')
-
-    X_pred = preprocessor.transform(X_sans_id)
-    proba = model.predict_proba(X_pred)
-    pred = model.predict(X_pred)
+    proba = model.predict_proba(X_sans_id)
+    pred = model.predict(X_sans_id)
 
     # DEBUG
     # print('id_client : ', id_client)
