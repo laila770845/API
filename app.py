@@ -20,7 +20,7 @@ data = pd.read_csv('Clients_test_dashboard.csv')
 model = pickle.load(open('model_best_lgb.pkl', 'rb'))
 
 #Chargement du preprocessor
-preprocessor = pickle.load(open('preprocessor.pkl', 'rb'))
+prep = pickle.load(open('preprocessor.pkl', 'rb'))
 
 
 @app.route('/')
@@ -37,7 +37,7 @@ def prediction(identifiant):
     X = data[data['SK_ID_CURR'] == ID]
 
     X_sans_id = X.drop(columns='SK_ID_CURR')
-    X_pred = preprocessor.transform(X_sans_id)
+    X_pred = prep.transform(X_sans_id)
     proba = model.predict_proba(X_pred)
     pred = model.predict(X_pred)
 
