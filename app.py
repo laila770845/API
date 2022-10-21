@@ -2,6 +2,7 @@
 
 # Import des librairies
 from flask import Flask, jsonify
+import pycaret
 import sklearn
 import pandas as pd
 import pickle
@@ -19,6 +20,9 @@ data = pd.read_csv('Clients_test_dashboard.csv')
 #Chargement du modèle
 model = pickle.load(open('model_best_lgb.pkl', 'rb'))
 
+#Chargement du preprocessor
+preprocessor = pickle.load(open('preprocessor.pkl', 'rb'))
+
 
 @app.route('/')
 def hello():
@@ -34,8 +38,9 @@ def prediction(identifiant):
     X = data[data['SK_ID_CURR'] == ID]
 
     X_sans_id = X.drop(columns='SK_ID_CURR')
-    proba = model.predict_proba(X_sans_id)
-    pred = model.predict(X_sans_id)
+    X_pred = preprocessor.transform(X_sans_id)
+    proba = model.predict_proba(X_pred)
+    pred = model.predict(X_pred)
 
     # DEBUG
     # print('id_client : ', id_client)
