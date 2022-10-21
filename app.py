@@ -4,6 +4,10 @@
 from flask import Flask, jsonify
 import sklearn
 from sklearn import preprocessing
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
 
 import pandas as pd
 import pickle
